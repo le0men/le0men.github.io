@@ -1,0 +1,88 @@
+<html>
+
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <h3> Leo Lu - ll865 </h3>
+  <p id="p1">
+    <svg id="p1s" width="600" height="600"></svg>
+
+    <script>
+      let svg = d3.select("#p1s")
+      let width = svg.attr("width")
+      let height = svg.attr("height")
+
+      const map = svg.append("g")
+      const mouseGroup = svg.append("g")
+
+      let label = mouseGroup.append("text")
+        .attr("id", "label")
+        .attr("visibility", "hidden");
+
+      const requestData = async () => {
+
+        const data = await d3.json("./miserables.json");
+        console.log(data);
+        let nodes = data["nodes"];
+        let links = data["links"];
+
+        let VR = d3.extent(links, d => d["value"])
+        let strokeScale = d3.scaleLinear(VR, [1, 5])
+        let colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+
+        const sim = d3.forceSimulation()
+          .nodes(nodes)
+          .force("links", d3.forceLink()
+            .links(links)
+            .id(node => node['character']))
+          .force("repulse", d3.forceManyBody().strength(-20))
+          .force("center", d3.forceCenter(width / 2.0, height / 2.0))
+          .on("tick", render);
+
+        function render() {
+          let lines = map.selectAll("line.link").data(links)
+            .join(
+              enter => enter.append("line")
+                .attr("class", "link")
+                .attr("stroke", "#333")
+                .attr("stroke-width", d => strokeScale(d['value']))
+                .attr("opacity", 1)
+            )
+            .attr("x1", d => d.source.x).attr("x2", d => d.target.x)
+            .attr("y1", d => d.source.y).attr("y2", d => d.target.y);
+
+          // Nodes
+          let circles = map.selectAll("circle.node").data(nodes)
+            .join(
+              enter => enter.append("circle")
+                .attr("class", "node")
+                .attr("stroke", "#333")
+                .attr("stroke-width", 1)
+                .attr("r", 5)
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("fill", d => colorScale(d['group']))
+                .on('mouseover', function (event, d) {
+                  label.text(d.character)
+                  label.attr("x", d.x + 10)
+                  label.attr("y", d.y + 5)
+                  label.attr("visibility", "");
+                })
+                .on('mouseout', function (event, d) {
+                  label.attr("visibility", "hidden");
+                })
+            )
+            .attr("transform", d => `translate(${d.x},${d.y})`);
+
+        }
+
+        render();
+
+      };
+      requestData()
+
+    </script>
+  </p>
+
+</body>
+
+</html>
