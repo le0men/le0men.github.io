@@ -11,11 +11,12 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 const loader = new GLTFLoader();
 let miku;
 
-loader.load('scene.gltf', function (gltf) {
+loader.load('squeeb/scene.gltf', function (gltf) {
 
   miku = gltf.scene;
   pivot.add(miku)
-  miku.position.set(-150, -200, 100);
+  //miku.position.set(-150, -200, 100);
+  miku.position.set(0, -6, 0);
 
 }, undefined, function (error) {
 
@@ -34,11 +35,11 @@ scene.add(pointLight2);
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshPhongMaterial({ flatShading: true })
 const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+//scene.add(cube);
 
 camera.position.z = 3;
-camera.position.z = 200;
-camera.position.y = -50;
+camera.position.z = 13;
+camera.position.y = 0;
 
 if (miku) miku.translateY(-500000);
 
@@ -52,16 +53,16 @@ effect.domElement.style.color = 'white';
 effect.domElement.style.backgroundColor = 'black';
 
 document.body.appendChild(effect.domElement);
-const controls = new TrackballControls(camera, effect.domElement);
+//const controls = new TrackballControls(camera, effect.domElement);
 const axis = new THREE.Vector3(0, 1, 0);
 let rad = 0.01;
 
 function animate() {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  // cube.rotation.x += 0.01;
+  // cube.rotation.y += 0.01;
 
   pivot.rotateOnAxis(axis, rad);
 
-  controls.update();
+  //controls.update();
   effect.render(scene, camera);
 }
