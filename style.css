@@ -1,21 +1,37 @@
 body {
   margin: 0;
-  color: white;
-  background-color: transparent
+  color: grey;
+  background-color: transparent;
+  font-family: monospace
 }
 
-#info {
+#intro {
+  color: white;
   position: absolute;
   top: 0px;
   width: 100%;
-  padding: 10px;
+  padding: 30px;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
   z-index: 1;
-  /* TODO Solve this in HTML */
+  white-space: pre-line;
+}
+
+#title {
+  font-size: 50;
+  font-weight: bold;
+}
+
+#introBlock {
+  font-size: 25;
+}
+
+#summary {
+  font-size: 12;
+  white-space: pre-line;
 }
