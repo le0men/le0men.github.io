@@ -57,7 +57,7 @@ class TextScramble {
 }
 
 // ——————————————————————————————————————————————————
-// Example
+// Execution
 // ——————————————————————————————————————————————————
 
 const phrases = [
@@ -84,4 +84,7 @@ const nm = document.querySelector('#title')
 const nms = new TextScramble(nm)
 nms.setText("Hi, I'm Leo Lu!")
 
+const sm = document.querySelector('#summary')
+const sms = new TextScramble(sm)
+sms.setText("I'm an Cornell undergraduate who likes making cool things. When I'm not coding, I draw, cook, and do crosswords (poorly). I'm currently looking for an internship, so contact me if you are interested!")
 next()
