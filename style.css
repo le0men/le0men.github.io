@@ -11,7 +11,8 @@ body {
   top: 0px;
   width: 100%;
   height: 100%;
-  padding: 125px;
+  padding-left: 125px;
+  padding-top: 150px;
   box-sizing: border-box;
   text-align: left;
   -moz-user-select: none;
@@ -35,15 +36,14 @@ body {
 #summary {
   font-size: 18;
   white-space: pre-line;
-  width: 50%;
+  width: 40%;
   height: 30%;
 }
 
 #stickyBar {
-  background-color: transparent;
   pointer-events: all;
   color: white;
-  position: sticky;
+  position: absolute;
   top: 0px;
   width: 100%;
   height: 50;
